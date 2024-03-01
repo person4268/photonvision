@@ -211,6 +211,7 @@ export interface AprilTagPipelineSettings extends PipelineSettings {
   tagFamily: AprilTagFamily;
   doMultiTarget: boolean;
   doSingleTargetAlways: boolean;
+  minTagArea: number;
 }
 export type ConfigurableAprilTagPipelineSettings = Partial<
   Omit<AprilTagPipelineSettings, "pipelineType" | "hammingDist" | "debug">
@@ -235,7 +236,8 @@ export const DefaultAprilTagPipelineSettings: AprilTagPipelineSettings = {
   threads: 4,
   tagFamily: AprilTagFamily.Family16h5,
   doMultiTarget: false,
-  doSingleTargetAlways: false
+  doSingleTargetAlways: false,
+  minTagArea: 0
 };
 
 export interface ArucoPipelineSettings extends PipelineSettings {

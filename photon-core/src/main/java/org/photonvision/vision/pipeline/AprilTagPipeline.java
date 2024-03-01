@@ -133,6 +133,26 @@ public class AprilTagPipeline extends CVPipeline<CVPipelineResult, AprilTagPipel
             if (detection.getDecisionMargin() < settings.decisionMargin) continue;
             if (detection.getHamming() > settings.hammingDist) continue;
 
+            double tx0 = detection.getCornerX(0);
+            double ty0 = detection.getCornerY(0);
+            double tx1 = detection.getCornerX(1);
+            double ty1 = detection.getCornerY(1);
+            double tx2 = detection.getCornerX(2);
+            double ty2 = detection.getCornerY(2);
+            double tx3 = detection.getCornerX(3);
+            double ty3 = detection.getCornerY(3);
+
+            if (true) {
+                // Area = 0.5 * |x1(y2 - y3) + x2(y3 - y1) + x3(y1 - y2)|
+                double area =
+                        0.5
+                                * Math.abs(
+                                        tx1 * (ty2 - ty3)
+                                                + tx2 * (ty3 - ty1)
+                                                + tx3 * (ty1 - ty2));
+                if (area < settings.minTagArea) continue;
+            }
+
             usedDetections.add(detection);
 
             // Populate target list for multitag

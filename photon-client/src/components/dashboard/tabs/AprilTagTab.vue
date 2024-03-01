@@ -89,5 +89,16 @@ const interactiveCols = computed(() =>
       :max="500"
       @input="(value) => useCameraSettingsStore().changeCurrentPipelineSetting({ numIterations: value }, false)"
     />
+
+    <pv-slider
+      v-model="currentPipelineSettings.minTagArea"
+      class="pt-2 pb-4"
+      :slider-cols="interactiveCols"
+      label="Minimum Tag Area"
+      tooltip="Minimum tag area in pixels, tags smaller than this will be rejected"
+      :min="0"
+      :max="30000"
+      @input="(value) => useCameraSettingsStore().changeCurrentPipelineSetting({ minTagArea: value }, false)"
+    />
   </div>
 </template>
